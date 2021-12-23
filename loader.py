@@ -29,6 +29,8 @@ folder=os.path.join(folder,OPTS.lang) #automatically switch directory depending 
 ids=[]
 train_datatxt=[]
 labels=[]
+nmax=1024
+counter=0
 for filename in os.listdir(folder):
    with open(os.path.join(folder, filename), 'r') as f:
        content=f.readlines()[1:]
@@ -38,6 +40,8 @@ for filename in os.listdir(folder):
            train_datatxt.append(text)
            labels.append(int(label))
            #print(id, label)
+           counter+=1
+           if nmax > 1024: break
 
 #vectorize data using a BERT model (RoBERTa for English, BARThez for French, ...? for Italian)
 
@@ -104,7 +108,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
 epochs = 2
 counter = 0
-print_every = 1000
+print_every = 100
 clip = 5
 valid_loss_min = np.Inf
 
@@ -118,13 +122,14 @@ for i in range(epochs):
 
         nnmodel.zero_grad()
         output, h = nnmodel(inputs, h)
-        print("output:", output)
+        #print("output:", output)
         loss = criterion(output.squeeze(), labels.float())
         loss.backward()
         nn.utils.clip_grad_norm_(nnmodel.parameters(), clip)
         optimizer.step()
 
         if counter%print_every == 0:
+            print(counter)
             test_h = nnmodel.init_bilstm_hidden(batch_size, device)
             test_losses = []
             nnmodel.eval()
@@ -138,7 +143,7 @@ for i in range(epochs):
             print("Epoch: {}/{}...".format(i+1, epochs),
                   "Step: {}...".format(counter),
                   "Loss: {:.6f}...".format(loss.item()),
-                  "Test Loss: {:.6f}".format(np.mean(val_losses)))
+                  "Test Loss: {:.6f}".format(np.mean(test_losses)))
             if np.mean(test_losses) <= test_loss_min:
                 torch.save(nnmodel.state_dict(), './state_dict.pt')
                 print('Test loss decreased ({:.6f} --> {:.6f}).  Saving model ...'.format(test_loss_min,np.mean(test_losses)))
