@@ -110,7 +110,7 @@ epochs = 2
 counter = 0
 print_every = 100
 clip = 5
-valid_loss_min = np.Inf
+test_loss_min = np.Inf
 
 nnmodel.train()
 for i in range(epochs):
