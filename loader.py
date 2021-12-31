@@ -8,6 +8,13 @@ from torch import nn
 from torch.utils.data import TensorDataset, DataLoader
 from biLSTMmodel import biLSTM
 
+def binary_acc(y_pred, y_test):
+    y_pred_tag = torch.round(torch.sigmoid(y_pred))
+    correct_results_sum = (y_pred_tag == y_test).sum().float()
+    acc = correct_results_sum/y_test.shape[0]
+    acc = torch.round(acc * 100)
+
+    return acc
 
 def parse_args():
     parser = argparse.ArgumentParser('LSTM baseline script\n')
@@ -29,8 +36,6 @@ folder=os.path.join(folder,OPTS.lang) #automatically switch directory depending 
 ids=[]
 train_datatxt=[]
 labels=[]
-nmax=1024
-counter=0
 for filename in os.listdir(folder):
    with open(os.path.join(folder, filename), 'r') as f:
        content=f.readlines()[1:]
@@ -40,8 +45,6 @@ for filename in os.listdir(folder):
            train_datatxt.append(text)
            labels.append(int(label))
            #print(id, label)
-           counter+=1
-           if nmax > 1024: break
 
 #vectorize data using a BERT model (RoBERTa for English, BARThez for French, ...? for Italian)
 
@@ -61,7 +64,7 @@ dataset=[] #array of tensors
 i=0
 MAXLEN=25 #set max sentence length to 20 (saw 19 in the training set for en, 21 for fr, 23 for it)
 for sent in train_datatxt:
-    print(sent)
+    #print(sent)
     inputs = tokenizer(sent, return_tensors="pt")
     row=inputs['input_ids'][0]
     a = torch.zeros(MAXLEN-len(row), dtype=torch.int)
@@ -83,17 +86,9 @@ tlabels=torch.tensor(labels).to(device)
 
 full_dataset = TensorDataset(tdataset, tlabels)
 train_data, test_data = torch.utils.data.random_split(full_dataset, [split_id, SIZE-split_id])
-"""
-print(tdataset.shape)
-print(tlabels.shape)
-train_sents, test_sents = tdataset[:70], tdataset[70:]
-train_labels, test_labels = tlabels[:70], tlabels[70:]
+print("train size:", len(train_data))
+print("test size:", len(test_data))
 
-#print(train_sents)
-
-train_data = TensorDataset(train_sents, train_labels)
-test_data = TensorDataset(test_sents, test_labels)
-"""
 batch_size = 64
 
 train_loader = DataLoader(train_data, shuffle=True, batch_size=batch_size, drop_last=True)
@@ -102,18 +97,19 @@ test_loader = DataLoader(test_data, shuffle=True, batch_size=batch_size, drop_la
 nnmodel=biLSTM(model)
 nnmodel.to(device)
 
-lr=0.005
-criterion = nn.BCELoss()
+lr=0.05
+criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
 epochs = 2
 counter = 0
-print_every = 100
+print_every = 10 #eval every 10 batches (640 input sents)
 clip = 5
 test_loss_min = np.Inf
 
 nnmodel.train()
 for i in range(epochs):
+    epoch_acc=[]
     h = nnmodel.init_bilstm_hidden(batch_size, device)
 
     for inputs, labels in train_loader:
@@ -122,28 +118,37 @@ for i in range(epochs):
 
         nnmodel.zero_grad()
         output, h = nnmodel(inputs, h)
-        #print("output:", output)
+        #print("output:", output.squeeze())
+        #print("labels:", labels)
         loss = criterion(output.squeeze(), labels.float())
         loss.backward()
         nn.utils.clip_grad_norm_(nnmodel.parameters(), clip)
         optimizer.step()
 
+        train_acc = binary_acc(output.squeeze(), labels.float())
+        epoch_acc.append(train_acc.item())
+
         if counter%print_every == 0:
-            print(counter)
             test_h = nnmodel.init_bilstm_hidden(batch_size, device)
             test_losses = []
+            test_accs=[]
             nnmodel.eval()
             for inp, lab in test_loader:
                 test_h = tuple([each.data for each in test_h])
                 out, test_h = nnmodel(inp, test_h)
                 test_loss = criterion(out.squeeze(), lab.float())
+                test_acc = binary_acc(out.squeeze(), lab.float())
                 test_losses.append(test_loss.item())
+                test_accs.append(test_acc.item())
 
             nnmodel.train()
             print("Epoch: {}/{}...".format(i+1, epochs),
                   "Step: {}...".format(counter),
                   "Loss: {:.6f}...".format(loss.item()),
-                  "Test Loss: {:.6f}".format(np.mean(test_losses)))
+                  "Test Loss: {:.6f}".format(np.mean(test_losses)),
+                  "Acc: {:.6f}...".format(np.mean(epoch_acc)),
+                  "Test Acc: {:.6f}".format(np.mean(test_accs)),
+                  )
             if np.mean(test_losses) <= test_loss_min:
                 torch.save(nnmodel.state_dict(), './state_dict.pt')
                 print('Test loss decreased ({:.6f} --> {:.6f}).  Saving model ...'.format(test_loss_min,np.mean(test_losses)))
