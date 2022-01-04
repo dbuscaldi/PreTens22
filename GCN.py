@@ -2,6 +2,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from torch_geometric.nn import RGCNConv, FastRGCNConv, SAGPooling
+from torch_geometric.nn.glob import global_max_pool
 
 class GCN(torch.nn.Module):
     def __init__(self, num_node_features, num_relations):
@@ -18,8 +19,8 @@ class GCN(torch.nn.Module):
         x = F.dropout(x, 0.5)
         x = self.conv2(x, edge_index, edge_attr)
         x = F.relu(x)
-        x = torch.max(x, dim=0)[0].squeeze()
+        x = global_max_pool(x, data.batch)
         x = self.dense(x)
-
+        
         return x
         #return F.log_softmax(x, dim=1)

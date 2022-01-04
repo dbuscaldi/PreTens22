@@ -5,7 +5,6 @@ import spacy
 import numpy as np
 import torch
 from torch import nn
-from torch.utils.data import TensorDataset, DataLoader
 import torch.nn.functional as F
 
 import torchtext
@@ -106,6 +105,7 @@ folder=os.path.join(folder,OPTS.lang) #automatically switch directory depending 
 ids=[]
 train_data=[]
 #labels=[]
+i=0
 for filename in os.listdir(folder):
    with open(os.path.join(folder, filename), 'r') as f:
        content=f.readlines()[1:]
@@ -114,6 +114,8 @@ for filename in os.listdir(folder):
            ids.append(id)
            train_data.append((text, int(label)))
            #labels.append(int(label))
+           i+=1
+           #if i > 128: break # for debug
 
 #vectorize data using a BERT model (RoBERTa for English, BARThez for French, ...? for Italian)
 
@@ -164,7 +166,7 @@ dataset_test = dataset[split_id:]
 device=torch.device("cpu")
 print(device)
 
-batch_size=1 #note: to fix loader as it groups graphs into the same batch
+batch_size=32 #note: to fix loader as it groups graphs into the same batch
 train_loader = DataLoader(dataset_train, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset_test, batch_size=batch_size, shuffle=False)
 
@@ -176,7 +178,7 @@ criterion = nn.BCEWithLogitsLoss()
 
 epochs = 2
 counter = 0
-print_every = 10
+print_every = 10 #print info each 10 batches
 test_loss_min = np.Inf
 
 model.train()
@@ -188,11 +190,11 @@ for epoch in range(epochs):
         #print(data)
         optimizer.zero_grad()
         out = model(data)
-        loss = criterion(out, data.y.flatten().float())
+        loss = criterion(out, data.y.float())
         loss.backward()
         optimizer.step()
 
-        train_acc = binary_acc(out, data.y.flatten().float())
+        train_acc = binary_acc(out, data.y.float())
         epoch_acc.append(train_acc.item())
 
         if counter%print_every == 0:
@@ -201,7 +203,7 @@ for epoch in range(epochs):
             model.eval()
             for test_data in test_loader:
                 out = model(test_data)
-                lab = test_data.y.flatten()
+                lab = test_data.y
                 test_loss = criterion(out, lab.float())
                 test_acc = binary_acc(out, lab.float())
                 test_losses.append(test_loss.item())
@@ -218,54 +220,7 @@ for epoch in range(epochs):
     i+=1
 
 """
-epochs = 2
-counter = 0
-print_every = 10 #eval every 10 batches (640 input sents)
-clip = 5
-test_loss_min = np.Inf
 
-nnmodel.train()
-for i in range(epochs):
-    epoch_acc=[]
-    h = nnmodel.init_bilstm_hidden(batch_size, device)
-
-    for inputs, labels in train_loader:
-        counter += 1
-        h = tuple([e.data for e in h])
-
-        nnmodel.zero_grad()
-        output, h = nnmodel(inputs, h)
-        #print("output:", output.squeeze())
-        #print("labels:", labels)
-        loss = criterion(output.squeeze(), labels.float())
-        loss.backward()
-        nn.utils.clip_grad_norm_(nnmodel.parameters(), clip)
-        optimizer.step()
-
-        train_acc = binary_acc(output.squeeze(), labels.float())
-        epoch_acc.append(train_acc.item())
-
-        if counter%print_every == 0:
-            test_h = nnmodel.init_bilstm_hidden(batch_size, device)
-            test_losses = []
-            test_accs=[]
-            nnmodel.eval()
-            for inp, lab in test_loader:
-                test_h = tuple([each.data for each in test_h])
-                out, test_h = nnmodel(inp, test_h)
-                test_loss = criterion(out.squeeze(), lab.float())
-                test_acc = binary_acc(out.squeeze(), lab.float())
-                test_losses.append(test_loss.item())
-                test_accs.append(test_acc.item())
-
-            nnmodel.train()
-            print("Epoch: {}/{}...".format(i+1, epochs),
-                  "Step: {}...".format(counter),
-                  "Loss: {:.6f}...".format(loss.item()),
-                  "Test Loss: {:.6f}".format(np.mean(test_losses)),
-                  "Acc: {:.6f}...".format(np.mean(epoch_acc)),
-                  "Test Acc: {:.6f}".format(np.mean(test_accs)),
-                  )
             if np.mean(test_losses) <= test_loss_min:
                 torch.save(nnmodel.state_dict(), './state_dict.pt')
                 print('Test loss decreased ({:.6f} --> {:.6f}).  Saving model ...'.format(test_loss_min,np.mean(test_losses)))
