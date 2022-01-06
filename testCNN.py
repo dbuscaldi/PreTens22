@@ -17,7 +17,7 @@ def binary_acc(y_pred, y_test):
     return acc
 
 def parse_args():
-    parser = argparse.ArgumentParser('LSTM baseline script\n')
+    parser = argparse.ArgumentParser('CNN test script\n')
     parser.add_argument('train_dir', metavar='data/en',
                         help='Directory containing the training data.')
     parser.add_argument('--language', '-l', dest='lang', default='en',

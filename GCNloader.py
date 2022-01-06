@@ -43,7 +43,7 @@ def getPyGDeps(root_token, nodelist):
     if root_token.pos_ != "PUNCT":
         root_id=nodelist.index(root_token.text)
         for child in root_token.children:
-            if (child.dep_ != "punct"):
+            if (child.dep_ != "punct" and child.text !="'"):
                 edges_attrs.append(labdict[child.dep_])
                 chld_id=nodelist.index(child.text)
                 edges_ts.append((chld_id, root_id))
@@ -78,7 +78,10 @@ def sentToPyG(sent, wvecs, label):
     edges = torch.tensor(edges_ts, dtype=torch.long)
     edges = edges.t().contiguous() #transpose from original format
 
-    y = torch.tensor(label, dtype=torch.long)
+    if OPTS.task == '1':
+        y = torch.tensor(label, dtype=torch.long)
+    else:
+        y = torch.tensor(label, dtype=torch.double)
     y = torch.reshape(y, (1,1))
 
     data = Data(x=x, edge_index=edges, edge_attr=e_attr, y=y)
@@ -91,6 +94,8 @@ def parse_args():
                         help='Directory containing the training data.')
     parser.add_argument('--language', '-l', dest='lang', default='en',
                         help='Language (en|fr|it)')
+    parser.add_argument('--task', '-t', dest='task', default='1',
+                        help='Task number (1: classification, 2: regression)')
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
@@ -112,7 +117,10 @@ for filename in os.listdir(folder):
        for c in content:
            (id, text, label)=c.strip().split('\t')
            ids.append(id)
-           train_data.append((text, int(label)))
+           if OPTS.task == '1':
+               train_data.append((text, int(label)))
+           else:
+               train_data.append((text, float(label)))
            #labels.append(int(label))
            i+=1
            #if i > 128: break # for debug
@@ -144,7 +152,7 @@ SIZE=len(train_data)
 dataset=[] #array of tensors
 i=0
 for sent, label in train_data:
-    print(sent)
+    #print(sent)
     processed = nlp(sent)
     for sent in processed.sents: #we whould have just one sentence per each instance
         sent_data = sentToPyG(sent, wvecs, label)
@@ -173,10 +181,13 @@ test_loader = DataLoader(dataset_test, batch_size=batch_size, shuffle=False)
 num_node_features = dataset_train[0].num_node_features
 
 model = GCN(num_node_features, NRELS).to(device)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
-criterion = nn.BCEWithLogitsLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.005)
+if OPTS.task == '1':
+    criterion = nn.BCEWithLogitsLoss()
+else:
+    criterion = nn.MSELoss()
 
-epochs = 2
+epochs = 5
 counter = 0
 print_every = 10 #print info each 10 batches
 test_loss_min = np.Inf
@@ -194,8 +205,9 @@ for epoch in range(epochs):
         loss.backward()
         optimizer.step()
 
-        train_acc = binary_acc(out, data.y.float())
-        epoch_acc.append(train_acc.item())
+        if OPTS.task == '1':
+            train_acc = binary_acc(out, data.y.float())
+            epoch_acc.append(train_acc.item())
 
         if counter%print_every == 0:
             test_losses = []
@@ -205,18 +217,26 @@ for epoch in range(epochs):
                 out = model(test_data)
                 lab = test_data.y
                 test_loss = criterion(out, lab.float())
-                test_acc = binary_acc(out, lab.float())
                 test_losses.append(test_loss.item())
-                test_accs.append(test_acc.item())
+                if OPTS.task == '1':
+                    test_acc = binary_acc(out, lab.float())
+                    test_accs.append(test_acc.item())
 
             model.train()
-            print("Epoch: {}/{}...".format(i+1, epochs),
-                  "Step: {}...".format(counter),
-                  "Loss: {:.6f}...".format(loss.item()),
-                  "Test Loss: {:.6f}".format(np.mean(test_losses)),
-                  "Acc: {:.6f}...".format(np.mean(epoch_acc)),
-                  "Test Acc: {:.6f}".format(np.mean(test_accs)),
-                  )
+            if OPTS.task == '1':
+                print("Epoch: {}/{}...".format(i+1, epochs),
+                      "Step: {}...".format(counter),
+                      "Loss: {:.6f}...".format(loss.item()),
+                      "Test Loss: {:.6f}".format(np.mean(test_losses)),
+                      "Acc: {:.6f}...".format(np.mean(epoch_acc)),
+                      "Test Acc: {:.6f}".format(np.mean(test_accs)),
+                      )
+            else:
+                print("Epoch: {}/{}...".format(i+1, epochs),
+                      "Step: {}...".format(counter),
+                      "Loss: {:.6f}...".format(loss.item()),
+                      "Test Loss: {:.6f}".format(np.mean(test_losses))
+                      )
     i+=1
 
 """

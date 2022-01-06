@@ -9,8 +9,8 @@ class biLSTM(nn.Module):
         self.dropout = dropout
         self.model=langmodel
         self.hidden_size=hidden_size
-        self.lstm = nn.LSTM(input_size=768, hidden_size=self.hidden_size, bidirectional=False, batch_first=True)
-        self.dense1 = nn.Linear(self.hidden_size, self.hidden_size * 2)
+        self.lstm = nn.LSTM(input_size=768, hidden_size=self.hidden_size, bidirectional=True, batch_first=True)
+        self.dense1 = nn.Linear(self.hidden_size *2, self.hidden_size * 2)
         self.dense = nn.Linear(self.hidden_size * 2, 1)
         #self.sig = nn.Sigmoid()
 
