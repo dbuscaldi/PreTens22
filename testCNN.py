@@ -89,25 +89,25 @@ train_data, test_data = torch.utils.data.random_split(full_dataset, [split_id, S
 print("train size:", len(train_data))
 print("test size:", len(test_data))
 
-batch_size = 64
+batch_size = 32
 
-train_loader = DataLoader(train_data, shuffle=True, batch_size=batch_size, drop_last=True)
-test_loader = DataLoader(test_data, shuffle=True, batch_size=batch_size, drop_last=True)
+train_loader = DataLoader(train_data, shuffle=True, batch_size=batch_size)
+test_loader = DataLoader(test_data, shuffle=True, batch_size=batch_size)
 
-N_FILTERS = 100
-FILTER_SIZES = [3,4,5]
-hidden_size=50
+N_FILTERS = 32
+FILTER_SIZES = [2,3]
+hidden_size=16
 
 nnmodel=CNN1d(model, hidden_size, N_FILTERS, FILTER_SIZES)
 nnmodel.to(device)
 
-lr=0.05
+lr=0.1
 criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
 epochs = 2
 counter = 0
-print_every = 10 #eval every 10 batches (640 input sents)
+print_every = 2 #eval every 10 batches (640 input sents)
 clip = 5
 test_loss_min = np.Inf
 
@@ -120,8 +120,6 @@ for i in range(epochs):
 
         nnmodel.zero_grad()
         output = nnmodel(inputs)
-        #print("output:", output.squeeze())
-        #print("labels:", labels)
         loss = criterion(output.squeeze(), labels.float())
         loss.backward()
         nn.utils.clip_grad_norm_(nnmodel.parameters(), clip)

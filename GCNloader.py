@@ -14,7 +14,7 @@ import torch_geometric
 from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader
 
-from GCN import GCN
+from GCN import GCN, GAT
 
 
 def binary_acc(y_pred, y_test):
@@ -164,7 +164,7 @@ for sent, label in train_data:
 #for batch in loader:
 #    print(batch)
 
-split_frac = 0.7 # 70% train, 30% test
+split_frac = 0.9 # 70% train, 30% test
 split_id = int(split_frac * SIZE)
 
 dataset_train = dataset[0:split_id]
@@ -174,13 +174,14 @@ dataset_test = dataset[split_id:]
 device=torch.device("cpu")
 print(device)
 
-batch_size=32 #note: to fix loader as it groups graphs into the same batch
+batch_size=32
 train_loader = DataLoader(dataset_train, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset_test, batch_size=batch_size, shuffle=False)
 
 num_node_features = dataset_train[0].num_node_features
 
-model = GCN(num_node_features, NRELS).to(device)
+#model = GCN(num_node_features, NRELS).to(device) #GCNConv
+model = GAT(num_node_features).to(device) #GATConv
 optimizer = torch.optim.Adam(model.parameters(), lr=0.005)
 if OPTS.task == '1':
     criterion = nn.BCEWithLogitsLoss()
