@@ -75,7 +75,7 @@ class SentenceDG:
 
         return (edges_attrs, edges_ts)
 
-    def sentToPyG(self, sent, label, task_type='1'):
+    def sentToPyG(self, sent, label=None, task_type='1'):
         #transforms a parsed sentence into a PyTorch Geometric Data object
         nodelist=[]
         for tok in sent:
@@ -99,12 +99,15 @@ class SentenceDG:
         edges = torch.tensor(edges_ts, dtype=torch.long)
         edges = edges.t().contiguous() #transpose from original format
 
-        if task_type == '1':
-            y = torch.tensor(label, dtype=torch.long)
+        if label==None: #testing mode
+            data = Data(x=x, edge_index=edges, edge_attr=e_attr)
         else:
-            y = torch.tensor(label, dtype=torch.double)
-        y = torch.reshape(y, (1,1))
+            if task_type == '1':
+                y = torch.tensor(label, dtype=torch.long)
+            else:
+                y = torch.tensor(label, dtype=torch.double)
+            y = torch.reshape(y, (1,1))
 
-        data = Data(x=x, edge_index=edges, edge_attr=e_attr, y=y)
+            data = Data(x=x, edge_index=edges, edge_attr=e_attr, y=y)
 
         return data

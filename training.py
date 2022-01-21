@@ -30,6 +30,8 @@ def parse_args():
                         help='Language (en|fr|it)')
     parser.add_argument('--task', '-t', dest='task', default='1',
                         help='Task number (1: classification, 2: regression)')
+    parser.add_argument('--model', '-m', dest='model', default='GAT',
+                        help='model choice (GAT|RGCN|Mixed|Parallel) default:GAT')
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
@@ -90,10 +92,15 @@ test_loader = DataLoader(dataset_test, batch_size=batch_size, shuffle=False)
 
 num_node_features = dataset_train[0].num_node_features
 
-#model = RGCN(num_node_features, NRELS).to(device) #GCNConv
-#model = GAT(num_node_features).to(device) #GATConv
-#model = Mixed(num_node_features, NRELS).to(device)
-model = Parallel(num_node_features, NRELS).to(device)
+if (OPTS.model =='RGCN'):
+    model = RGCN(num_node_features, NRELS).to(device) #GCNConv
+elif (OPTS.model == 'Mixed'):
+    model = Mixed(num_node_features, NRELS).to(device)
+elif (OPTS.model == 'Parallel'):
+    model = Parallel(num_node_features, NRELS).to(device)
+else:
+    model = GAT(num_node_features).to(device) #GATConv
+
 
 optimizer = torch.optim.Adam(model.parameters(), lr=0.005)
 if OPTS.task == '1':
@@ -138,7 +145,7 @@ for epoch in range(epochs):
                     test_acc = binary_acc(out, lab.float())
                     test_accs.append(test_acc.item())
 
-            model.train()
+
             if OPTS.task == '1':
                 print("Epoch: {}/{}...".format(i+1, epochs),
                       "Step: {}...".format(counter),
@@ -153,11 +160,12 @@ for epoch in range(epochs):
                       "Loss: {:.6f}...".format(loss.item()),
                       "Test Loss: {:.6f}".format(np.mean(test_losses))
                       )
-
             if np.mean(test_losses) <= test_loss_min:
-                model_filename='./state_dict_'+OPTS.lang+'_t'+OPTS.task+'.pt'
+                model_filename='./state_dict_'+OPTS.model+'_'+OPTS.lang+'_t'+OPTS.task+'.pt'
                 torch.save(model.state_dict(), model_filename)
                 print('Test loss decreased ({:.6f} --> {:.6f}).  Saving model ...'.format(test_loss_min,np.mean(test_losses)))
                 test_loss_min = np.mean(test_losses)
+
+            model.train()
 
     i+=1
