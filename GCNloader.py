@@ -16,6 +16,7 @@ from torch_geometric.loader import DataLoader
 
 from GCN import GCN, GAT
 
+DIRECTED=True
 
 def binary_acc(y_pred, y_test):
     y_pred_tag = torch.round(torch.sigmoid(y_pred))
@@ -45,8 +46,10 @@ def getPyGDeps(root_token, nodelist):
         for child in root_token.children:
             if (child.dep_ != "punct" and child.text !="'"):
                 edges_attrs.append(labdict[child.dep_])
+                if(not DIRECTED): edges_attrs.append(labdict[child.dep_])
                 chld_id=nodelist.index(child.text)
                 edges_ts.append((chld_id, root_id))
+                if(not DIRECTED): edges_ts.append((root_id, chld_id))
 
             (a_u, e_u) = getPyGDeps(child, nodelist)
             edges_attrs = edges_attrs + a_u
@@ -170,8 +173,8 @@ split_id = int(split_frac * SIZE)
 dataset_train = dataset[0:split_id]
 dataset_test = dataset[split_id:]
 
-#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device=torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device=torch.device("cpu")
 print(device)
 
 batch_size=32
@@ -180,8 +183,8 @@ test_loader = DataLoader(dataset_test, batch_size=batch_size, shuffle=False)
 
 num_node_features = dataset_train[0].num_node_features
 
-#model = GCN(num_node_features, NRELS).to(device) #GCNConv
-model = GAT(num_node_features).to(device) #GATConv
+model = GCN(num_node_features, NRELS).to(device) #GCNConv
+#model = GAT(num_node_features).to(device) #GATConv
 optimizer = torch.optim.Adam(model.parameters(), lr=0.005)
 if OPTS.task == '1':
     criterion = nn.BCEWithLogitsLoss()
@@ -198,6 +201,7 @@ i=0
 for epoch in range(epochs):
     epoch_acc=[]
     for data in train_loader:
+        data.to(device)
         counter += 1
         #print(data)
         optimizer.zero_grad()
@@ -215,6 +219,7 @@ for epoch in range(epochs):
             test_accs=[]
             model.eval()
             for test_data in test_loader:
+                test_data.to(device)
                 out = model(test_data)
                 lab = test_data.y
                 test_loss = criterion(out, lab.float())

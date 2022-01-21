@@ -7,10 +7,10 @@ from torch_geometric.nn.glob import global_max_pool, global_mean_pool
 class GCN(torch.nn.Module):
     def __init__(self, num_node_features, num_relations):
         super().__init__()
-        #self.conv1 = RGCNConv(num_node_features, 32, num_relations)
-        self.conv1 = FiLMConv(num_node_features, 32, num_relations) #FiLMConv looks like a better choice than RGCNConv
-        #self.conv2 = RGCNConv(32, 16, num_relations)
-        self.conv2 = FiLMConv(32, 16, num_relations)
+        self.conv1 = RGCNConv(num_node_features, 32, num_relations)
+        #self.conv1 = FiLMConv(num_node_features, 32, num_relations) #FiLMConv looks like a better choice than RGCNConv but it bugs on GPU
+        self.conv2 = RGCNConv(32, 16, num_relations)
+        #self.conv2 = FiLMConv(32, 16, num_relations)
         self.dense = nn.Linear(16, 1)
 
     def forward(self, data):
@@ -43,7 +43,7 @@ class GAT(torch.nn.Module):
         x = F.dropout(x, 0.5)
         x = self.dense1(x)
         x = F.leaky_relu(x)
-        x = global_mean_pool(x, data.batch)
+        x = global_max_pool(x, data.batch)
         x = self.dense2(x)
         #print(x)
 
