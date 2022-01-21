@@ -161,7 +161,7 @@ for epoch in range(epochs):
                       "Test Loss: {:.6f}".format(np.mean(test_losses))
                       )
             if np.mean(test_losses) <= test_loss_min:
-                model_filename='./state_dict_'+OPTS.model+'_'+OPTS.lang+'_t'+OPTS.task+'.pt'
+                model_filename='./models/state_dict_'+OPTS.model+'_'+OPTS.lang+'_t'+OPTS.task+'.pt'
                 torch.save(model.state_dict(), model_filename)
                 print('Test loss decreased ({:.6f} --> {:.6f}).  Saving model ...'.format(test_loss_min,np.mean(test_losses)))
                 test_loss_min = np.mean(test_losses)

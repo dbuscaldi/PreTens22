@@ -53,12 +53,15 @@ SIZE=len(test_data)
 dataset=[] #array of tensors
 i=0
 for sent in test_data:
-    #print(sent)
+    #print(ids[i])
     processed = gc.process(sent)
-    for sent in processed.sents: #we whould have just one sentence per each instance
-        sent_data = gc.sentToPyG(sent, task_type=OPTS.task)
+    for s in processed.sents:
+        #print(sent)
+        sent_data = gc.sentToPyG(s, task_type=OPTS.task)
         dataset.append(sent_data)
+        break; #we should have just one sentence per each instance
         #print(sent_data)
+
     i+=1
 
 
@@ -86,7 +89,7 @@ elif (OPTS.model == 'Parallel'):
 else:
     model = GAT(num_node_features).to(device) #GATConv
 
-model_filename='./state_dict_'+OPTS.model+'_'+OPTS.lang+'_t'+OPTS.task+'.pt'
+model_filename='./models/state_dict_'+OPTS.model+'_'+OPTS.lang+'_t'+OPTS.task+'.pt'
 
 print("loading state dict...")
 model.load_state_dict(torch.load(model_filename))
@@ -96,10 +99,13 @@ with torch.no_grad():
     i=0
     for test_data in test_loader:
         test_data.to(device)
-        out = model(test_data)
-        if OPTS.task == '1':
-            res = (torch.round(torch.sigmoid(out)).long()).item()
-        else:
-            res = np.round(out.item(), 2)
+        try:
+            out = model(test_data)
+            if OPTS.task == '1':
+                res = (torch.round(torch.sigmoid(out)).long()).item()
+            else:
+                res = np.round(out.item(), 2)
+        except: #IndexError, AssertionError are possible here
+            res=0
         print(ids[i], res, sep="\t")
         i+=1

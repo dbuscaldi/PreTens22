@@ -1,0 +1,193 @@
+loading SpaCy...
+loading vectors...
+cuda
+Epoch: 1/5... Step: 10... Loss: 0.652261... Test Loss: 0.670623 Acc: 55.200000... Test Acc: 56.857143
+Test loss decreased (inf --> 0.670623).  Saving model ...
+Epoch: 1/5... Step: 20... Loss: 0.643315... Test Loss: 0.596987 Acc: 63.550000... Test Acc: 69.238095
+Test loss decreased (0.670623 --> 0.596987).  Saving model ...
+Epoch: 1/5... Step: 30... Loss: 0.505541... Test Loss: 0.501155 Acc: 67.200000... Test Acc: 79.666667
+Test loss decreased (0.596987 --> 0.501155).  Saving model ...
+Epoch: 1/5... Step: 40... Loss: 0.305855... Test Loss: 0.465868 Acc: 71.550000... Test Acc: 82.642857
+Test loss decreased (0.501155 --> 0.465868).  Saving model ...
+Epoch: 1/5... Step: 50... Loss: 0.442912... Test Loss: 0.483694 Acc: 74.900000... Test Acc: 83.428571
+Epoch: 1/5... Step: 60... Loss: 0.342268... Test Loss: 0.511692 Acc: 77.133333... Test Acc: 83.428571
+Epoch: 1/5... Step: 70... Loss: 0.357078... Test Loss: 0.483978 Acc: 77.828571... Test Acc: 83.571429
+Epoch: 1/5... Step: 80... Loss: 0.173386... Test Loss: 0.472614 Acc: 79.287500... Test Acc: 83.285714
+Epoch: 1/5... Step: 90... Loss: 0.258770... Test Loss: 0.481370 Acc: 80.211111... Test Acc: 82.976190
+Epoch: 1/5... Step: 100... Loss: 0.324183... Test Loss: 0.465530 Acc: 80.520000... Test Acc: 83.428571
+Test loss decreased (0.465868 --> 0.465530).  Saving model ...
+Epoch: 1/5... Step: 110... Loss: 0.239406... Test Loss: 0.494305 Acc: 81.290909... Test Acc: 83.571429
+Epoch: 1/5... Step: 120... Loss: 0.487457... Test Loss: 0.526748 Acc: 81.466667... Test Acc: 80.000000
+Epoch: 1/5... Step: 130... Loss: 0.605385... Test Loss: 0.482188 Acc: 81.653846... Test Acc: 83.571429
+Epoch: 1/5... Step: 140... Loss: 0.314793... Test Loss: 0.480746 Acc: 81.857143... Test Acc: 83.285714
+Epoch: 1/5... Step: 150... Loss: 0.206757... Test Loss: 0.474951 Acc: 81.900000... Test Acc: 82.857143
+Epoch: 1/5... Step: 160... Loss: 0.387750... Test Loss: 0.483516 Acc: 82.150000... Test Acc: 83.571429
+Epoch: 1/5... Step: 170... Loss: 0.431391... Test Loss: 0.462975 Acc: 82.405882... Test Acc: 82.952381
+Test loss decreased (0.465530 --> 0.462975).  Saving model ...
+Epoch: 1/5... Step: 180... Loss: 0.390817... Test Loss: 0.451340 Acc: 82.450000... Test Acc: 83.285714
+Test loss decreased (0.462975 --> 0.451340).  Saving model ...
+Epoch: 1/5... Step: 190... Loss: 0.357689... Test Loss: 0.510958 Acc: 82.731579... Test Acc: 83.428571
+Epoch: 1/5... Step: 200... Loss: 0.622552... Test Loss: 0.476023 Acc: 82.785000... Test Acc: 81.619048
+Epoch: 1/5... Step: 210... Loss: 0.578339... Test Loss: 0.463316 Acc: 82.752381... Test Acc: 82.809524
+Epoch: 1/5... Step: 220... Loss: 0.351484... Test Loss: 0.487457 Acc: 82.631818... Test Acc: 83.571429
+Epoch: 1/5... Step: 230... Loss: 0.455080... Test Loss: 0.472603 Acc: 82.743478... Test Acc: 83.571429
+Epoch: 1/5... Step: 240... Loss: 0.273936... Test Loss: 0.468439 Acc: 82.845833... Test Acc: 83.404762
+Epoch: 1/5... Step: 250... Loss: 1.041695... Test Loss: 0.484630 Acc: 82.992000... Test Acc: 83.119048
+Epoch: 1/5... Step: 260... Loss: 0.312762... Test Loss: 0.482950 Acc: 83.126923... Test Acc: 83.261905
+Epoch: 1/5... Step: 270... Loss: 0.208875... Test Loss: 0.456975 Acc: 83.266667... Test Acc: 83.595238
+Epoch: 1/5... Step: 280... Loss: 0.254343... Test Loss: 0.483079 Acc: 83.471429... Test Acc: 83.261905
+Epoch: 1/5... Step: 290... Loss: 0.190831... Test Loss: 0.442116 Acc: 83.434483... Test Acc: 83.404762
+Test loss decreased (0.451340 --> 0.442116).  Saving model ...
+Epoch: 1/5... Step: 300... Loss: 0.202514... Test Loss: 0.447953 Acc: 83.530000... Test Acc: 83.404762
+Epoch: 1/5... Step: 310... Loss: 0.503597... Test Loss: 0.472036 Acc: 83.454839... Test Acc: 83.119048
+Epoch: 1/5... Step: 320... Loss: 0.229124... Test Loss: 0.461136 Acc: 83.446875... Test Acc: 83.119048
+Epoch: 2/5... Step: 330... Loss: 0.414754... Test Loss: 0.451771 Acc: 88.000000... Test Acc: 83.261905
+Epoch: 2/5... Step: 340... Loss: 0.370307... Test Loss: 0.457908 Acc: 85.909091... Test Acc: 83.119048
+Epoch: 2/5... Step: 350... Loss: 0.344946... Test Loss: 0.453454 Acc: 86.190476... Test Acc: 83.571429
+Epoch: 2/5... Step: 360... Loss: 0.452005... Test Loss: 0.458874 Acc: 85.838710... Test Acc: 83.904762
+Epoch: 2/5... Step: 370... Loss: 0.422444... Test Loss: 0.450357 Acc: 85.365854... Test Acc: 84.285714
+Epoch: 2/5... Step: 380... Loss: 0.504531... Test Loss: 0.478830 Acc: 85.705882... Test Acc: 83.547619
+Epoch: 2/5... Step: 390... Loss: 0.411684... Test Loss: 0.473244 Acc: 85.803279... Test Acc: 83.571429
+Epoch: 2/5... Step: 400... Loss: 0.289854... Test Loss: 0.451764 Acc: 85.535211... Test Acc: 83.142857
+Epoch: 2/5... Step: 410... Loss: 0.274514... Test Loss: 0.470944 Acc: 85.666667... Test Acc: 84.190476
+Epoch: 2/5... Step: 420... Loss: 0.505552... Test Loss: 0.477552 Acc: 85.967033... Test Acc: 84.309524
+Epoch: 2/5... Step: 430... Loss: 0.442223... Test Loss: 0.456404 Acc: 85.683168... Test Acc: 83.261905
+Epoch: 2/5... Step: 440... Loss: 0.432394... Test Loss: 0.451579 Acc: 85.639640... Test Acc: 83.119048
+Epoch: 2/5... Step: 450... Loss: 0.459641... Test Loss: 0.458417 Acc: 85.495868... Test Acc: 83.333333
+Epoch: 2/5... Step: 460... Loss: 0.409623... Test Loss: 0.438990 Acc: 85.519084... Test Acc: 83.547619
+Test loss decreased (0.442116 --> 0.438990).  Saving model ...
+Epoch: 2/5... Step: 470... Loss: 0.486530... Test Loss: 0.436143 Acc: 85.574468... Test Acc: 83.452381
+Test loss decreased (0.438990 --> 0.436143).  Saving model ...
+Epoch: 2/5... Step: 480... Loss: 0.361129... Test Loss: 0.443631 Acc: 85.629139... Test Acc: 84.023810
+Epoch: 2/5... Step: 490... Loss: 0.777054... Test Loss: 0.448081 Acc: 85.440994... Test Acc: 83.761905
+Epoch: 2/5... Step: 500... Loss: 0.347579... Test Loss: 0.461705 Acc: 85.456140... Test Acc: 82.047619
+Epoch: 2/5... Step: 510... Loss: 0.243584... Test Loss: 0.503134 Acc: 85.651934... Test Acc: 84.357143
+Epoch: 2/5... Step: 520... Loss: 0.328017... Test Loss: 0.463217 Acc: 85.884817... Test Acc: 83.761905
+Epoch: 2/5... Step: 530... Loss: 0.536371... Test Loss: 0.441050 Acc: 85.746269... Test Acc: 83.428571
+Epoch: 2/5... Step: 540... Loss: 0.255473... Test Loss: 0.458076 Acc: 85.957346... Test Acc: 84.023810
+Epoch: 2/5... Step: 550... Loss: 0.502539... Test Loss: 0.442203 Acc: 86.153846... Test Acc: 84.476190
+Epoch: 2/5... Step: 560... Loss: 0.598964... Test Loss: 0.455131 Acc: 86.134199... Test Acc: 84.333333
+Epoch: 2/5... Step: 570... Loss: 0.166289... Test Loss: 0.431870 Acc: 86.248963... Test Acc: 84.214286
+Test loss decreased (0.436143 --> 0.431870).  Saving model ...
+Epoch: 2/5... Step: 580... Loss: 0.426072... Test Loss: 0.418951 Acc: 86.079681... Test Acc: 84.642857
+Test loss decreased (0.431870 --> 0.418951).  Saving model ...
+Epoch: 2/5... Step: 590... Loss: 0.387698... Test Loss: 0.440481 Acc: 86.187739... Test Acc: 84.119048
+Epoch: 2/5... Step: 600... Loss: 0.211290... Test Loss: 0.424951 Acc: 86.095941... Test Acc: 83.380952
+Epoch: 2/5... Step: 610... Loss: 0.414631... Test Loss: 0.425032 Acc: 86.046263... Test Acc: 84.452381
+Epoch: 2/5... Step: 620... Loss: 0.985077... Test Loss: 0.423126 Acc: 85.969072... Test Acc: 84.142857
+Epoch: 2/5... Step: 630... Loss: 0.517055... Test Loss: 0.415008 Acc: 85.790698... Test Acc: 84.047619
+Test loss decreased (0.418951 --> 0.415008).  Saving model ...
+Epoch: 2/5... Step: 640... Loss: 0.423082... Test Loss: 0.412333 Acc: 85.810289... Test Acc: 83.428571
+Test loss decreased (0.415008 --> 0.412333).  Saving model ...
+Epoch: 2/5... Step: 650... Loss: 0.428943... Test Loss: 0.447560 Acc: 85.769470... Test Acc: 84.142857
+Epoch: 3/5... Step: 660... Loss: 0.122849... Test Loss: 0.409394 Acc: 90.500000... Test Acc: 83.619048
+Test loss decreased (0.412333 --> 0.409394).  Saving model ...
+Epoch: 3/5... Step: 670... Loss: 0.194183... Test Loss: 0.408366 Acc: 85.000000... Test Acc: 83.595238
+Test loss decreased (0.409394 --> 0.408366).  Saving model ...
+Epoch: 3/5... Step: 680... Loss: 0.454571... Test Loss: 0.429437 Acc: 85.363636... Test Acc: 83.880952
+Epoch: 3/5... Step: 690... Loss: 0.232355... Test Loss: 0.399758 Acc: 86.687500... Test Acc: 84.952381
+Test loss decreased (0.408366 --> 0.399758).  Saving model ...
+Epoch: 3/5... Step: 700... Loss: 0.198119... Test Loss: 0.419348 Acc: 86.785714... Test Acc: 83.380952
+Epoch: 3/5... Step: 710... Loss: 0.414516... Test Loss: 0.482191 Acc: 87.230769... Test Acc: 86.142857
+Epoch: 3/5... Step: 720... Loss: 0.455563... Test Loss: 0.432977 Acc: 87.000000... Test Acc: 82.952381
+Epoch: 3/5... Step: 730... Loss: 0.271264... Test Loss: 0.396044 Acc: 87.083333... Test Acc: 84.928571
+Test loss decreased (0.399758 --> 0.396044).  Saving model ...
+Epoch: 3/5... Step: 740... Loss: 0.411374... Test Loss: 0.393111 Acc: 86.914634... Test Acc: 86.095238
+Test loss decreased (0.396044 --> 0.393111).  Saving model ...
+Epoch: 3/5... Step: 750... Loss: 0.548900... Test Loss: 0.402487 Acc: 86.847826... Test Acc: 83.833333
+Epoch: 3/5... Step: 760... Loss: 0.307351... Test Loss: 0.466687 Acc: 86.872549... Test Acc: 83.595238
+Epoch: 3/5... Step: 770... Loss: 0.333313... Test Loss: 0.426752 Acc: 86.482143... Test Acc: 84.333333
+Epoch: 3/5... Step: 780... Loss: 0.238727... Test Loss: 0.398201 Acc: 86.737705... Test Acc: 85.190476
+Epoch: 3/5... Step: 790... Loss: 0.540905... Test Loss: 0.396044 Acc: 86.606061... Test Acc: 85.214286
+Epoch: 3/5... Step: 800... Loss: 0.119448... Test Loss: 0.389050 Acc: 86.549296... Test Acc: 85.666667
+Test loss decreased (0.393111 --> 0.389050).  Saving model ...
+Epoch: 3/5... Step: 810... Loss: 0.504644... Test Loss: 0.399086 Acc: 86.585526... Test Acc: 84.785714
+Epoch: 3/5... Step: 820... Loss: 0.607839... Test Loss: 0.400453 Acc: 86.858025... Test Acc: 84.333333
+Epoch: 3/5... Step: 830... Loss: 0.243034... Test Loss: 0.416294 Acc: 86.912791... Test Acc: 85.404762
+Epoch: 3/5... Step: 840... Loss: 0.279990... Test Loss: 0.384090 Acc: 86.928571... Test Acc: 85.380952
+Test loss decreased (0.389050 --> 0.384090).  Saving model ...
+Epoch: 3/5... Step: 850... Loss: 0.533263... Test Loss: 0.389237 Acc: 86.791667... Test Acc: 84.928571
+Epoch: 3/5... Step: 860... Loss: 0.127297... Test Loss: 0.378926 Acc: 86.643564... Test Acc: 85.238095
+Test loss decreased (0.384090 --> 0.378926).  Saving model ...
+Epoch: 3/5... Step: 870... Loss: 0.163459... Test Loss: 0.402916 Acc: 86.599057... Test Acc: 86.904762
+Epoch: 3/5... Step: 880... Loss: 0.505088... Test Loss: 0.398108 Acc: 86.680180... Test Acc: 85.952381
+Epoch: 3/5... Step: 890... Loss: 0.396025... Test Loss: 0.380934 Acc: 86.426724... Test Acc: 86.142857
+Epoch: 3/5... Step: 900... Loss: 0.207591... Test Loss: 0.382496 Acc: 86.425620... Test Acc: 84.761905
+Epoch: 3/5... Step: 910... Loss: 0.490966... Test Loss: 0.411879 Acc: 86.448413... Test Acc: 81.547619
+Epoch: 3/5... Step: 920... Loss: 0.289222... Test Loss: 0.382539 Acc: 86.419847... Test Acc: 85.904762
+Epoch: 3/5... Step: 930... Loss: 0.342995... Test Loss: 0.404166 Acc: 86.319853... Test Acc: 84.880952
+Epoch: 3/5... Step: 940... Loss: 0.307344... Test Loss: 0.385296 Acc: 86.322695... Test Acc: 84.047619
+Epoch: 3/5... Step: 950... Loss: 0.141712... Test Loss: 0.392887 Acc: 86.623288... Test Acc: 85.357143
+Epoch: 3/5... Step: 960... Loss: 0.625390... Test Loss: 0.402885 Acc: 86.632450... Test Acc: 85.261905
+Epoch: 3/5... Step: 970... Loss: 0.432752... Test Loss: 0.351841 Acc: 86.644231... Test Acc: 85.976190
+Test loss decreased (0.378926 --> 0.351841).  Saving model ...
+Epoch: 3/5... Step: 980... Loss: 0.235287... Test Loss: 0.367819 Acc: 86.599379... Test Acc: 85.928571
+Epoch: 4/5... Step: 990... Loss: 0.151607... Test Loss: 0.360771 Acc: 90.000000... Test Acc: 82.976190
+Epoch: 4/5... Step: 1000... Loss: 0.581461... Test Loss: 0.452070 Acc: 87.307692... Test Acc: 84.666667
+Epoch: 4/5... Step: 1010... Loss: 0.205184... Test Loss: 0.375983 Acc: 87.739130... Test Acc: 84.214286
+Epoch: 4/5... Step: 1020... Loss: 0.393995... Test Loss: 0.393371 Acc: 87.515152... Test Acc: 84.333333
+Epoch: 4/5... Step: 1030... Loss: 0.130788... Test Loss: 0.429285 Acc: 88.441860... Test Acc: 84.666667
+Epoch: 4/5... Step: 1040... Loss: 0.343558... Test Loss: 0.430466 Acc: 87.924528... Test Acc: 85.571429
+Epoch: 4/5... Step: 1050... Loss: 0.465690... Test Loss: 0.440657 Acc: 87.682540... Test Acc: 82.523810
+Epoch: 4/5... Step: 1060... Loss: 0.092100... Test Loss: 0.401042 Acc: 88.109589... Test Acc: 85.928571
+Epoch: 4/5... Step: 1070... Loss: 0.237127... Test Loss: 0.365516 Acc: 87.674699... Test Acc: 85.857143
+Epoch: 4/5... Step: 1080... Loss: 0.329871... Test Loss: 0.389233 Acc: 87.344086... Test Acc: 83.809524
+Epoch: 4/5... Step: 1090... Loss: 0.303383... Test Loss: 0.398698 Acc: 87.378641... Test Acc: 87.095238
+Epoch: 4/5... Step: 1100... Loss: 0.163611... Test Loss: 0.374451 Acc: 87.743363... Test Acc: 85.333333
+Epoch: 4/5... Step: 1110... Loss: 0.311506... Test Loss: 0.379656 Acc: 87.373984... Test Acc: 85.714286
+Epoch: 4/5... Step: 1120... Loss: 0.491691... Test Loss: 0.383159 Acc: 87.578947... Test Acc: 86.071429
+Epoch: 4/5... Step: 1130... Loss: 0.247783... Test Loss: 0.389135 Acc: 87.454545... Test Acc: 84.642857
+Epoch: 4/5... Step: 1140... Loss: 0.594998... Test Loss: 0.398817 Acc: 87.522876... Test Acc: 86.190476
+Epoch: 4/5... Step: 1150... Loss: 0.247038... Test Loss: 0.366545 Acc: 87.564417... Test Acc: 85.976190
+Epoch: 4/5... Step: 1160... Loss: 0.183901... Test Loss: 0.337953 Acc: 87.462428... Test Acc: 87.666667
+Test loss decreased (0.351841 --> 0.337953).  Saving model ...
+Epoch: 4/5... Step: 1170... Loss: 0.248687... Test Loss: 0.346931 Acc: 87.612022... Test Acc: 85.952381
+Epoch: 4/5... Step: 1180... Loss: 0.423084... Test Loss: 0.347346 Acc: 87.450777... Test Acc: 86.119048
+Epoch: 4/5... Step: 1190... Loss: 0.507166... Test Loss: 0.441994 Acc: 87.399015... Test Acc: 86.785714
+Epoch: 4/5... Step: 1200... Loss: 0.389098... Test Loss: 0.384646 Acc: 87.056338... Test Acc: 85.047619
+Epoch: 4/5... Step: 1210... Loss: 0.146333... Test Loss: 0.361575 Acc: 87.053812... Test Acc: 86.166667
+Epoch: 4/5... Step: 1220... Loss: 0.632715... Test Loss: 0.354156 Acc: 86.806867... Test Acc: 85.119048
+Epoch: 4/5... Step: 1230... Loss: 0.472093... Test Loss: 0.352784 Acc: 86.740741... Test Acc: 85.285714
+Epoch: 4/5... Step: 1240... Loss: 0.517483... Test Loss: 0.434908 Acc: 86.849802... Test Acc: 85.761905
+Epoch: 4/5... Step: 1250... Loss: 0.468509... Test Loss: 0.353755 Acc: 86.904943... Test Acc: 86.476190
+Epoch: 4/5... Step: 1260... Loss: 0.284935... Test Loss: 0.354859 Acc: 86.886447... Test Acc: 84.976190
+Epoch: 4/5... Step: 1270... Loss: 0.108594... Test Loss: 0.359103 Acc: 86.961131... Test Acc: 85.880952
+Epoch: 4/5... Step: 1280... Loss: 0.298096... Test Loss: 0.382349 Acc: 87.109215... Test Acc: 85.500000
+Epoch: 4/5... Step: 1290... Loss: 0.169768... Test Loss: 0.363474 Acc: 87.128713... Test Acc: 87.142857
+Epoch: 4/5... Step: 1300... Loss: 0.145651... Test Loss: 0.358031 Acc: 87.127796... Test Acc: 86.214286
+Epoch: 4/5... Step: 1310... Loss: 0.392260... Test Loss: 0.371259 Acc: 87.089783... Test Acc: 85.404762
+Epoch: 5/5... Step: 1320... Loss: 0.564722... Test Loss: 0.368815 Acc: 92.500000... Test Acc: 86.023810
+Epoch: 5/5... Step: 1330... Loss: 0.441163... Test Loss: 0.353264 Acc: 89.071429... Test Acc: 86.666667
+Epoch: 5/5... Step: 1340... Loss: 0.058422... Test Loss: 0.366611 Acc: 88.708333... Test Acc: 85.690476
+Epoch: 5/5... Step: 1350... Loss: 0.130900... Test Loss: 0.355415 Acc: 90.264706... Test Acc: 86.595238
+Epoch: 5/5... Step: 1360... Loss: 0.338966... Test Loss: 0.381390 Acc: 88.090909... Test Acc: 82.833333
+Epoch: 5/5... Step: 1370... Loss: 0.368063... Test Loss: 0.353123 Acc: 87.537037... Test Acc: 86.500000
+Epoch: 5/5... Step: 1380... Loss: 0.388766... Test Loss: 0.350734 Acc: 87.171875... Test Acc: 85.833333
+Epoch: 5/5... Step: 1390... Loss: 0.326071... Test Loss: 0.347740 Acc: 87.405405... Test Acc: 86.666667
+Epoch: 5/5... Step: 1400... Loss: 0.416255... Test Loss: 0.369882 Acc: 87.142857... Test Acc: 86.452381
+Epoch: 5/5... Step: 1410... Loss: 0.242270... Test Loss: 0.349305 Acc: 87.148936... Test Acc: 84.952381
+Epoch: 5/5... Step: 1420... Loss: 0.273565... Test Loss: 0.354494 Acc: 87.384615... Test Acc: 85.738095
+Epoch: 5/5... Step: 1430... Loss: 0.172410... Test Loss: 0.433329 Acc: 87.517544... Test Acc: 85.833333
+Epoch: 5/5... Step: 1440... Loss: 0.263324... Test Loss: 0.384874 Acc: 87.580645... Test Acc: 81.714286
+Epoch: 5/5... Step: 1450... Loss: 0.504847... Test Loss: 0.342365 Acc: 87.641791... Test Acc: 85.428571
+Epoch: 5/5... Step: 1460... Loss: 0.066904... Test Loss: 0.374270 Acc: 87.423611... Test Acc: 86.952381
+Epoch: 5/5... Step: 1470... Loss: 0.332067... Test Loss: 0.341749 Acc: 87.610390... Test Acc: 85.309524
+Epoch: 5/5... Step: 1480... Loss: 0.470581... Test Loss: 0.344265 Acc: 87.231707... Test Acc: 86.000000
+Epoch: 5/5... Step: 1490... Loss: 0.156815... Test Loss: 0.394474 Acc: 87.545977... Test Acc: 85.880952
+Epoch: 5/5... Step: 1500... Loss: 0.246769... Test Loss: 0.388380 Acc: 87.728261... Test Acc: 86.904762
+Epoch: 5/5... Step: 1510... Loss: 0.332823... Test Loss: 0.367989 Acc: 87.726804... Test Acc: 84.904762
+Epoch: 5/5... Step: 1520... Loss: 0.248992... Test Loss: 0.401750 Acc: 87.995098... Test Acc: 86.166667
+Epoch: 5/5... Step: 1530... Loss: 0.232603... Test Loss: 0.364004 Acc: 87.864486... Test Acc: 85.690476
+Epoch: 5/5... Step: 1540... Loss: 0.386657... Test Loss: 0.384876 Acc: 88.000000... Test Acc: 86.119048
+Epoch: 5/5... Step: 1550... Loss: 0.816568... Test Loss: 0.387067 Acc: 88.094017... Test Acc: 87.000000
+Epoch: 5/5... Step: 1560... Loss: 0.367742... Test Loss: 0.355380 Acc: 87.995902... Test Acc: 84.928571
+Epoch: 5/5... Step: 1570... Loss: 0.199752... Test Loss: 0.361545 Acc: 87.881890... Test Acc: 88.071429
+Epoch: 5/5... Step: 1580... Loss: 0.097117... Test Loss: 0.345871 Acc: 87.803030... Test Acc: 84.761905
+Epoch: 5/5... Step: 1590... Loss: 0.379813... Test Loss: 0.365916 Acc: 87.773723... Test Acc: 85.333333
+Epoch: 5/5... Step: 1600... Loss: 0.313170... Test Loss: 0.336910 Acc: 87.792254... Test Acc: 86.000000
+Test loss decreased (0.337953 --> 0.336910).  Saving model ...
+Epoch: 5/5... Step: 1610... Loss: 0.139469... Test Loss: 0.343537 Acc: 87.935374... Test Acc: 86.928571
+Epoch: 5/5... Step: 1620... Loss: 0.188265... Test Loss: 0.370601 Acc: 88.049342... Test Acc: 87.523810
+Epoch: 5/5... Step: 1630... Loss: 0.367284... Test Loss: 0.334152 Acc: 88.073248... Test Acc: 86.023810
+Test loss decreased (0.336910 --> 0.334152).  Saving model ...
+Epoch: 5/5... Step: 1640... Loss: 0.153051... Test Loss: 0.335582 Acc: 88.135802... Test Acc: 86.952381

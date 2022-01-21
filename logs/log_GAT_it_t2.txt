@@ -1,0 +1,22 @@
+loading SpaCy...
+loading vectors...
+cuda
+Epoch: 1/5... Step: 10... Loss: 6.280661... Test Loss: 4.448470
+Test loss decreased (inf --> 4.448470).  Saving model ...
+Epoch: 1/5... Step: 20... Loss: 2.570502... Test Loss: 2.017273
+Test loss decreased (4.448470 --> 2.017273).  Saving model ...
+Epoch: 1/5... Step: 30... Loss: 5.636107... Test Loss: 2.164014
+Epoch: 2/5... Step: 40... Loss: 0.714467... Test Loss: 1.938931
+Test loss decreased (2.017273 --> 1.938931).  Saving model ...
+Epoch: 2/5... Step: 50... Loss: 4.193388... Test Loss: 1.820584
+Test loss decreased (1.938931 --> 1.820584).  Saving model ...
+Epoch: 2/5... Step: 60... Loss: 1.042237... Test Loss: 2.050141
+Epoch: 3/5... Step: 70... Loss: 1.202010... Test Loss: 2.273331
+Epoch: 3/5... Step: 80... Loss: 4.354448... Test Loss: 1.837987
+Epoch: 3/5... Step: 90... Loss: 0.807967... Test Loss: 2.483390
+Epoch: 4/5... Step: 100... Loss: 2.700667... Test Loss: 2.310712
+Epoch: 4/5... Step: 110... Loss: 2.201211... Test Loss: 1.945802
+Epoch: 4/5... Step: 120... Loss: 1.669577... Test Loss: 2.162418
+Epoch: 5/5... Step: 130... Loss: 2.828938... Test Loss: 2.487672
+Epoch: 5/5... Step: 140... Loss: 0.711305... Test Loss: 2.419476
+Epoch: 5/5... Step: 150... Loss: 1.893677... Test Loss: 2.161437
